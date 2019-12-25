@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Header.scss";
-import instagram from "../../../public/assets/png/instagram.png"
+import instagram from "../../../public/assets/png/instagram.png";
+import "whatwg-fetch";
 
 class Header extends Component {
   constructor(props) {
@@ -9,47 +10,33 @@ class Header extends Component {
     this.navContainer = React.createRef();
     this.state = {
       toggleMenu: false,
-      header: [
-        {
-          key: 2,
-          menuHref: "/",
-          menuItem: "Home"
-        },
-        {
-          key: 3,
-          menuHref: "/about",
-          menuItem: "About Us"
-        },
-        {
-          key: 4,
-          menuHref: "/",
-          menuItem: "Products and Services"
-        },
-        {
-          key: 5,
-          menuHref: "/",
-          menuItem: "Contact Us"
-        },
-        {
-          key: 6,
-          menuHref: "/",
-          menuItem: "Admin"
-        }
-      ],
+      header: [],
       mobileView: window.innerWidth <= 767 && window.innerWidth <= 767
     };
     this.toggleMenuIcon = this.toggleMenuIcon.bind(this);
   }
 
-  // componentDidMount() {
-  //   HeaderService.getHeaders()
-  //     .then(res => {
-  //       this.setState({
-  //         header: res.data,
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+  getHeaderData() {
+    fetch("/api/headers", { method: "GET" })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        this.setState({
+          header: json
+        });
+      });
+  }
+
+  componentDidMount() {
+    this.getHeaderData();
+    //   HeaderService.getHeaders()
+    //     .then(res => {
+    //       this.setState({
+    //         header: res.data,
+    //       });
+    //     })
+    //     .catch(err => console.log(err));
+  }
 
   toggleMenuIcon() {
     if (this.state.mobileView) {
@@ -62,16 +49,12 @@ class Header extends Component {
 
   render() {
     return (
-      <nav
-        className="nav"        
-        ref={this.navContainer}
-      >
-        <div className="menu-icon"></div>
+      <nav className="nav" ref={this.navContainer}>
+        <div className="menu-icon" onClick={this.toggleMenuIcon}></div>
         <img
           src={instagram}
           alt="title"
           style={{ width: "45px", height: "45px" }}
-          onClick={this.toggleMenuIcon}
         />
         <ul
           className={`nav-container ${
