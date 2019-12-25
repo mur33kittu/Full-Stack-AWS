@@ -4,7 +4,7 @@ db.headers.insert(
     {
       key: 2,
       menuHref: "/",
-      menuItem: "/Home"
+      menuItem: "Home"
     },
     {
       key: 3,

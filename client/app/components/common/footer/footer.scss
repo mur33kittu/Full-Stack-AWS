@@ -1,0 +1,25 @@
+$blue-color: #3b5998;
+$gray-color: #eee;
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-flow: flex-start;
+  position: fixed;
+  background-color: white;
+  bottom: 0;
+  z-index: 1999;
+  width: 100%;
+  color: blue;
+  & > div {
+    padding: 14px;
+  }
+  & > img {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    align-self: center;
+  }
+  box-shadow: 0px -15px 10px -15px #111;
+}

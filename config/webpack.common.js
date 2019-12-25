@@ -22,8 +22,10 @@ module.exports = {
   resolve: {
     extensions: [".js", ".json", ".css", ".scss", ".html"],
     alias: {
-      app: "client/app"
+      app: "client/app",
+      'assets': '../client/public/assets'
     }
+
   },
 
   module: {
@@ -59,8 +61,8 @@ module.exports = {
         })
       },
       {
-        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-        loader: "url-loader?limit=100000"
+        test: /\.(png|svg|jpe?g|gif)$/,
+        use: ["file-loader"]
       }
     ]
   },
