@@ -3,6 +3,7 @@ const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const path = require("path");
 
 const helpers = require("./helpers");
 
@@ -23,9 +24,9 @@ module.exports = {
     extensions: [".js", ".json", ".css", ".scss", ".html"],
     alias: {
       app: "client/app",
-      'assets': '../client/public/assets'
-    }
-
+      assets: "../public/assets",
+      uploads: path.resolve(__dirname, "../public/uploads")
+    },
   },
 
   module: {
@@ -62,7 +63,20 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
-        use: ["file-loader"]
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8000, // Convert images < 8kb to base64 strings
+              fallback: 'file-loader',
+              name: "images/[hash]-[name].[ext]"
+            }
+          }
+        ]
+      },
+      {
+        test: /\.mp4$/,
+        use: "file-loader?name=videos/[name].[ext]"
       }
     ]
   },
@@ -77,7 +91,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      template: helpers.root("client/public/index.html"),
+      template: helpers.root("public/index.html"),
       inject: "body"
     }),
 
@@ -88,7 +102,7 @@ module.exports = {
 
     new CopyWebpackPlugin([
       {
-        from: helpers.root("client/public")
+        from: helpers.root("public")
       }
     ])
   ]

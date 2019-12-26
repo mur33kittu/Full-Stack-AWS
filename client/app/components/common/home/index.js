@@ -1,22 +1,27 @@
-import React, {Component} from 'react';
-import home1 from '../../../../public/assets/png/home1.png';
-import home2 from '../../../../public/assets/png/home2.png';
-import home3 from '../../../../public/assets/png/home3.png';
-import home4 from '../../../../public/assets/png/home4.png';
-import home5 from '../../../../public/assets/png/home5.png';
-import home6 from '../../../../public/assets/png/home6.png';
-import home7 from '../../../../public/assets/png/home7.png';
-import one from '../../../../public/assets/png/one.png';
-import two from '../../../../public/assets/png/two.png';
+import React, { Component } from "react";
+import home1 from "../../../../public/assets/png/home1.png";
+import home2 from "../../../../public/assets/png/home2.png";
+import home3 from "../../../../public/assets/png/home3.png";
+import home4 from "../../../../public/assets/png/home4.png";
+import home5 from "../../../../public/assets/png/home5.png";
+import home6 from "../../../../public/assets/png/home6.png";
+import home7 from "../../../../public/assets/png/home7.png";
+import one from "../../../../public/assets/png/one.png";
+import two from "../../../../public/assets/png/two.png";
 
-import './home.scss';
+import "./home.scss";
+import Upload from "../upload";
+import Files from "../files";
 
 export default class Home extends Component {
   render() {
     return (
-      <div className="slider">
+      <>
+      <Upload />
+      <Files />
+      <div className="slider">        
         <div className="flex-container">
-          <div className="slides">
+          <div className="slides">            
             <div id="slide-1">
               <img src={home1} alt="home1" />
             </div>
@@ -158,6 +163,7 @@ export default class Home extends Component {
           </div>
         </div>
       </div>
+      </>
     );
   }
 }
