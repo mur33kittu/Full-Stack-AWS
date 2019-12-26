@@ -21,21 +21,22 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".js", ".json", ".css", ".scss", ".html"],
+    extensions: [".js", ".jsx", ".json", ".css", ".scss", ".html"],
     alias: {
       app: "client/app",
       assets: "../public/assets",
       uploads: path.resolve(__dirname, "../public/uploads")
-    },
+    }
   },
 
   module: {
     rules: [
       // JS files
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         include: helpers.root("client"),
-        loader: "babel-loader"
+        loader: "babel-loader",
+        exclude: /(node_modules)/
       },
 
       // SCSS files
@@ -62,16 +63,9 @@ module.exports = {
         })
       },
       {
-        test: /\.(png|svg|jpe?g|gif)$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 8000, // Convert images < 8kb to base64 strings
-              fallback: 'file-loader',
-              name: "images/[hash]-[name].[ext]"
-            }
-          }
+        test: /\.(png|svg|jpe?g|gif)$/i,
+        loaders: [
+          "url-loader"
         ]
       },
       {
@@ -83,7 +77,6 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(NODE_ENV)

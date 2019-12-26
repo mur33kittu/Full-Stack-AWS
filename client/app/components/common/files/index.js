@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "../card";
 import { FileUploadService } from "../../../services/upload";
-const filePath = "../../../../../public/uploads";
+const filePath = "uploads";
 export default class Files extends Component {
   constructor() {
     super();
@@ -10,6 +10,7 @@ export default class Files extends Component {
       error: null
     };
   }
+
   componentDidMount() {
     FileUploadService.getFiles()
       .then(files => {
@@ -19,26 +20,26 @@ export default class Files extends Component {
   }
   render() {
     return (
-      <div>
-        <span>List of files: </span>
+      <div className="flex-container">
         {this.state.files.length > 0 &&
           this.state.files.map(file => this.renderImage(file))}
       </div>
     );
   }
-  
+
   renderImage(file) {
     return (
-      <Card
-        name={file.path.split("/")[1]}
-        path={filePath}
-        key={
-          file.path.split("/")[1] +
-          Math.random()
-            .toString(36)
-            .substring(7)
-        }
-      />
+      <Card key={file.path.split("/")[1] + new Date().getMilliseconds()}>
+        <img
+          src={filePath + "/" + file.path.split("/")[1]}
+          alt={
+            file.path.split("/")[1] +
+            new Date().getMilliseconds() +
+            new Date().getSeconds()
+          }
+        />
+        <div>{file.path.split("/")[1]}</div>
+      </Card>
     );
   }
 }
