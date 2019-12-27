@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { FileUploadService } from "../../../services/upload";
 import "./upload.scss";
 import BreadCrums from "../crumbs";
+import Spinner from "../spinner";
 
 class Upload extends Component {
   constructor(props) {
@@ -12,24 +13,27 @@ class Upload extends Component {
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.state = {
       alert: "success",
-      message: ""
+      message: "",
+      alert: -1
     };
   }
 
   onFilesAdded(evt) {
+    this.setState({ alert: 0 });
     const file = evt.target.files[0];
     FileUploadService.upload(file)
-      .then(res => {
-        console.log(file);
+      .then(() => {
         this.setState({
           alert: "success",
-          message: file.name + " uploaded successfully"
+          message: file.name + " uploaded successfully",
+          alert: 1
         });
       })
       .catch(err =>
         this.setState({
           alert: "error",
-          message: file.name + " not uploaded"
+          message: file.name + " not uploaded" + " " + JSON.stringify(err),
+          alert: 2
         })
       );
   }
@@ -44,7 +48,11 @@ class Upload extends Component {
           name="myfile"
           onChange={this.onFilesAdded}
         />
-        <BreadCrums crumbData={this.state} />
+        {this.state.alert === 0 ? (
+          <Spinner />
+        ) : (
+          <BreadCrums crumbData={this.state} />
+        )}
       </div>
     );
   }
