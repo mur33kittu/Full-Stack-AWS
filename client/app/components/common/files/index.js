@@ -5,24 +5,24 @@ const filePath = "uploads";
 export default class Files extends Component {
   constructor() {
     super();
-    this.state = {
-      files: [],
-      error: null
-    };
+    // this.state = {
+    //   files: [],
+    //   error: null
+    // };
   }
 
-  componentDidMount() {
-    FileUploadService.getFiles()
-      .then(files => {
-        this.setState({ files: files.data });
-      })
-      .catch(err => this.setState({ error: err }));
-  }
+  // componentDidMount() {
+  //   FileUploadService.getFiles()
+  //     .then(files => {
+  //       this.setState({ files: files.data });
+  //     })
+  //     .catch(err => this.setState({ error: err }));
+  // }
   render() {
     return (
       <div className="flex-container">
-        {this.state.files.length > 0 &&
-          this.state.files.map(file => this.renderImage(file))}
+        {this.props.fileData.files.length > 0 &&
+          this.props.fileData.files.map(file => this.renderImage(file))}
       </div>
     );
   }

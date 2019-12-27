@@ -28,14 +28,16 @@ class Upload extends Component {
           message: file.name + " uploaded successfully",
           alert: 1
         });
+        this.props.checkFlag("success");
       })
-      .catch(err =>
+      .catch(err => {
         this.setState({
           alert: "error",
           message: file.name + " not uploaded" + " " + JSON.stringify(err),
           alert: 2
-        })
-      );
+        });
+        this.props.checkFlag("failed");
+      });
   }
 
   render() {
