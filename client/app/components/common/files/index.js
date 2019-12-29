@@ -1,28 +1,19 @@
 import React, { Component } from "react";
 import Card from "../card";
-import { FileUploadService } from "../../../services/upload";
+// import { FileUploadService } from "../../../services/upload";
 const filePath = "uploads";
 export default class Files extends Component {
-  constructor() {
-    super();
-    // this.state = {
-    //   files: [],
-    //   error: null
-    // };
+  constructor(props) {
+    // console.log('here');
+    super(props);
+    this.props = props;
   }
 
-  // componentDidMount() {
-  //   FileUploadService.getFiles()
-  //     .then(files => {
-  //       this.setState({ files: files.data });
-  //     })
-  //     .catch(err => this.setState({ error: err }));
-  // }
   render() {
     return (
       <div className="flex-container">
-        {this.props.fileData.files.length > 0 &&
-          this.props.fileData.files.map(file => this.renderImage(file))}
+        {this.props.fileData.length > 0 &&
+          this.props.fileData.map(file => this.renderImage(file))}
       </div>
     );
   }

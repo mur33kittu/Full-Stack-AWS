@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./header.scss";
 import { HeaderService } from "../../../services/header";
-import instagram from "../../../../public/assets/png/instagram.png";
+import instagram from "../../../../../public/assets/png/instagram.png";
+// import { ApolloConsumer } from "@apollo/react-hooks";
 
 class Header extends Component {
   constructor(props) {
@@ -18,10 +19,10 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    HeaderService.getHeaders()
+    HeaderService.getHeaders(this.props.client)
       .then(res => {
         this.setState({
-          header: res.data
+          header: res.data.headers
         });
       })
       .catch(err => console.log(err));
@@ -72,5 +73,7 @@ class Header extends Component {
     );
   }
 }
+
+// const client = ApolloConsumer.contextTypes();
 
 export default Header;

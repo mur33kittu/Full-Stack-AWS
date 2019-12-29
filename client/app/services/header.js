@@ -1,13 +1,26 @@
-const axios = require('axios');
+import gql from "graphql-tag";
 
-function getHeaders () {
-    return axios.get('/api/headers').then(res =>  {
-        return Promise.resolve(res);
-    }).catch(err => {
-        return Promise.reject(err);
+const body = gql`
+  query {
+    headers {
+      key
+      menuHref
+      menuItem
+    }
+  }
+`;
+
+const getHeaders = client => {
+  return client
+    .query({ query: body })
+    .then(res => {
+      return Promise.resolve(res);
+    })
+    .catch(err => {
+      return Promise.reject(err);
     });
 };
 
 export const HeaderService = {
-    getHeaders
-}
+  getHeaders
+};

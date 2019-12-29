@@ -9,7 +9,7 @@ class Upload extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.fileInputRef = React.createRef();
+    this.fileInputRef = React.createRef();    
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.state = {
       alert: "success",
@@ -21,7 +21,7 @@ class Upload extends Component {
   onFilesAdded(evt) {
     this.setState({ alert: 0 });
     const file = evt.target.files[0];
-    FileUploadService.upload(file)
+    FileUploadService.upload(file, this.props.client)
       .then(() => {
         this.setState({
           alert: "success",

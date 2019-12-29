@@ -1,8 +1,8 @@
 import React from 'react';
 import './footer.scss';
-import facebook from '../../../../public/assets/png/facebook.png';
-import twitter from '../../../../public/assets/png/twitter.png';
-import instagram from '../../../../public/assets/png/instagram.png';
+import facebook from '../../../../../public/assets/png/facebook.png';
+import twitter from '../../../../../public/assets/png/twitter.png';
+import instagram from "../../../../../public/assets/png/instagram.png";
 
 function Footer() {
   return (
