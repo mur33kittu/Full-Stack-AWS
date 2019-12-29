@@ -41,21 +41,8 @@ const getFiles = client => {
 };
 
 function upload(file, client) {
-  const formData = new FormData();
-  formData.append("file", file);
-  const file1 = new Blob(["Foo."], { type: "text/plain" });
-  file1.name = "bar.txt";
-  // client.mutate({
-  //   mutation: gql`
-  //     mutation($file: Upload!) {
-  //       uploadFile(file: $file) {
-  //         success
-  //       }
-  //     }
-  //   `,
-  //   variables: { file1 }
-  // })
-
+  // const formData = new FormData();
+  // formData.append("file", file);
   return client
     .mutate({
       mutation: gql`
