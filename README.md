@@ -1,6 +1,5 @@
 # Full-Stack-AWS
 
-https://medium.com/@Keithweaver_/setting-up-mern-stack-on-aws-ec2-6dc599be4737
 ssh -i "mern-key.pem" ubuntu@ec2-34-215-31-42.us-west-2.compute.amazonaws.com
 sudo apt-get update && sudo apt-get upgrade -y
 
