@@ -5,12 +5,20 @@ import About from "./components/common/about";
 import Admin from "./components/common/admin";
 import Learning from "./components/common/learning";
 
-const router = () => {
+const router = props => {
   return (
     <Router>
       <div>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/home" component={Home} />
+        <Route
+          exact
+          path="/"
+          component={() => <Home client={props} />}
+        />
+        <Route
+          exact
+          path="/home"
+          component={() => <Home client={props} />}
+        />
         <Route exact path="/about" component={About} />
         <Route exact path="/learning" component={Learning} />
         <Route exact path="/admin" component={Admin} />

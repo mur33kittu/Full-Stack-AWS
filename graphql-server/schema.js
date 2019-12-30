@@ -11,20 +11,14 @@ module.exports = gql`
     path: String
   }
 
-  type File {
-    fileName: String!
-    mimeType: String!
-    encoding: String!
-  }
-
   type Query {
     headers: [Headers]
     photos: [Photos]
+    files: [String]
   }
   scalar Upload
-  type Mutation {
-    singleUpload(file: Upload!): File!,
-    singleUploadStream(file: Upload!): File!
-  }
 
+  type Mutation {
+    uploadFile(file: Upload!): Boolean
+  }
 `;

@@ -6,10 +6,11 @@ import router from "./routes";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
+// import { HttpLink } from "apollo-link-http";
+import { createUploadLink } from "apollo-upload-client";
 
 const cache = new InMemoryCache();
-const link = new HttpLink({
+const link = new createUploadLink({
   uri: "http://localhost:8080/graphql"
 });
 
@@ -23,7 +24,7 @@ function App() {
     <div className="main">
       <ApolloProvider client={client}>
         <Header client={client} />
-        <main className="main-container">{router()}</main>
+        <main className="main-container">{router(client)}</main>
         <Footer />
       </ApolloProvider>
     </div>
