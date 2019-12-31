@@ -23,7 +23,7 @@ db.headers.insert(
     },
     {
       key: 6,
-      menuHref: "/",
+      menuHref: "/admin",
       menuItem: "Admin"
     }
   ])
