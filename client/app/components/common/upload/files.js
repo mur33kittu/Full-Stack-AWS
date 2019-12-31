@@ -22,14 +22,12 @@ export const Files = props => {
   return (
     <div className="flex-container">
       {files.map(x => (
-        <>
-          <img
-            style={{ width: 200 }}
-            key={x.path + new Date().getMilliseconds() + Math.random() * 1000}
-            src={`${x.path}`}
-            alt={x}
-          />
-        </>
+        <img
+          style={{ width: 200 }}
+          key={x.path + new Date().getMilliseconds() + Math.random() * 100000}
+          src={`${x.path}`}
+          alt={x}
+        />
       ))}
     </div>
   );
