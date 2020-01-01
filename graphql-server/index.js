@@ -11,14 +11,19 @@ const mongoose = require("mongoose");
 const path = require("path");
 const config = require("../config/config");
 const webpackConfig = require("../webpack.config");
-// const cors = require("cors");
+const cors = require("cors");
 const isDev = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(cors());
+var corsOptions = {
+  origin: "http://localhost:8080/graphql",
+  credentials: true // <-- REQUIRED backend setting
+};
+
+app.use(cors(corsOptions));
 
 // Configuration
 // ================================================================================================
