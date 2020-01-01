@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const config = require("../config/config");
 const webpackConfig = require("../webpack.config");
-const cors = require("cors");
+// const cors = require("cors");
 const isDev = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 8080;
 
@@ -23,7 +23,7 @@ var corsOptions = {
   credentials: true // <-- REQUIRED backend setting
 };
 
-app.use(cors(corsOptions));
+// app.use(cors());
 
 // Configuration
 // ================================================================================================
@@ -47,7 +47,7 @@ const server = new ApolloServer({
   }
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, cors: corsOptions });
 
 if (isDev) {
   const compiler = webpack(webpackConfig);
