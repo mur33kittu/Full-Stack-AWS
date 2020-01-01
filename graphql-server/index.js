@@ -19,7 +19,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 var corsOptions = {
-  origin: "http://localhost:8080/graphql",
+  origin: "http://localhost:8080",
   credentials: true // <-- REQUIRED backend setting
 };
 
